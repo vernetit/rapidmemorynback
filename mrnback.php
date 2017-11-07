@@ -2,6 +2,7 @@
 <html>
 <head>
   <!-- roberto chalean 2017 robertchalean@gmail.com-->
+  <meta charset="UTF-8">
   <title>Rapid Memory N-back!</title>
 
   <meta name="description" content="Loci N-back">
@@ -145,7 +146,7 @@
   <option value="7">7 objects</option>
   <option value="8">8 objects</option>
 </select> &nbsp;
-<span id="t1"></span> <input type="number" value="14" id="milis-val" class="inp-num" style="width: 50px;" step="2" onchange="if(this.value%2!=0){ this.value++; } if(this.value<=1){ this.value=2; } if(this.value>=22){ this.value=22; } ">
+<span id="t1"></span> <input type="number" value="14" id="milis-val" class="inp-num" style="width: 50px;" step="2" onchange="perdidas=0; if(this.value%2!=0){ this.value++; } if(this.value<=1){ this.value=2; } if(this.value>=22){ this.value=22; } ">
 <select id="preguntaTime" class="mySelect">
   <option value="50">.05</option>
   <option value="100">.1</option>
@@ -184,7 +185,7 @@
 <a href="#" id="gray-btn" onclick="bGray=!bGray; if(bGray){ $('#canvas').css('background-color','gray'); $('body').css('background-color','gray'); $('select').css('background-color','gray'); $('.inp-num').css('background-color','gray'); $(':text').css('background-color','gray'); $('#gray-btn').html('white background');  }else{ $('#canvas').css('background-color','white'); $('body').css('background-color','white'); $('select').css('background-color','white'); $(':text').css('background-color','white'); $('.inp-num').css('background-color','white'); $('#gray-btn').html('gray background');  }"></a>
 <script type="text/javascript"> bGray = 0; $('#gray-btn').html('gray background'); </script>
 <? include "otherNback.php"; ?>
-<a href="#" onclick="alert('Memoria rápida N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nThis software is experimental and may contain errors.\nLicense: MIT\nSource Code: https://github.com/vernetit/3dnback\nContact: robertchalean@gmail.com');">?</a>
+<a href="#" onclick="alert('Rapid Memory N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nThis software is experimental and may contain errors.\nRapid Memory N-back is licensed under the GNU General Public License v3.0\nSource Code: https://github.com/vernetit/rapidmemorynback/\nContact: robertchalean@gmail.com');">?</a>
 &nbsp;<div class="fb-share-button" data-href="http://competicionmental.appspot.com/mrnback" data-layout="button_count" style="float: right;"></div>
 </div> <!-- Fin Controles -->
 <br>
@@ -670,6 +671,7 @@ function play(_xxx){
 
       //agregarResultado(cantidadBack,porcentaje_ok);
 
+      resta=0;
       recomendacion="Same level";
       if(porcentaje_ok>=75){
          recomendacion="Level augmented";
@@ -677,11 +679,13 @@ function play(_xxx){
          pasadas = 20 + (cantidadBack-1) * 6;
          $("#cantidadBack").html(cantidadBack);
          $("#pasadas").html(pasadas);
+         resta=1;
+         perdidas=0;
       
       }
       if(porcentaje_ok<75 && porcentaje_ok>=50){
          recomendacion="Keep on the same level";
-         perdidas=0;
+         
       }
       if(porcentaje_ok<50){
          perdidas++;
@@ -723,7 +727,7 @@ function play(_xxx){
         sumaTxtTxt=" Sum of numbers= " + acumuladorSuma + "<br>";
       }
 
-      txt="<h3>Results</h3>" + positionTxt + " " + soundTxt + " " + imageTxt + " " + colorTxt + " " + vaTxt + " " + avTxt + "<br>" + sumaTxtTxt +
+      txt="<h3>Rapid Memory " + (cantidadBack-resta) + "-back " +  $("#milis-val").val() + " digits span Results!</h3>"  + positionTxt + " " + soundTxt + " " + imageTxt + " " + colorTxt + " " + vaTxt + " " + avTxt + "<br>" + sumaTxtTxt +
          "Score: "+ porcentaje_ok + "% errors: " + errorShow + "<br>" + recomendacion;
 
       $("#results").html(txt);
