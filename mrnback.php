@@ -121,44 +121,47 @@
  <a href="#" id="mas" style="text-decoration:none; color: #7D0552;"><b>+</b></a> 
  <span id="cantidadBack">2</span>
  <a href="#" id="menos"  style="text-decoration:none; color: #7D0552;"><b>-</b></a>
- <select id="isVariable" onchange="actualizaVariable(this.value);" style="display:none;">
-  <option value="1" selected>Variable</option>
-  <option value="2">noVariable</option>
-</select> &nbsp;
+  &nbsp;
   Back&nbsp;
 
-<span style="display: none;">
-<select id="cantidadLoci" style="width: 55px" onchange="actualizaLoci(this.value);" style="display:none;">
-  <option value="1" selected>1 loci</option>
-  <option value="2">2 loci</option>
-  <option value="3">3 loci</option>
-  <option value="4">4 loci</option>
-</select> &nbsp;
-</span>
-
- <select id="cantidadElementos" onchange="actualizaElementos(this.value);" style="display:none;">
-  <option value="1" selected>1 object</option>
-  <option value="2">2 objects</option>
-  <option value="3">3 objects</option>
-  <option value="4">4 objects</option>
-  <option value="5">5 objects</option>
-  <option value="6">6 objects</option>
-  <option value="7">7 objects</option>
-  <option value="8">8 objects</option>
-</select> &nbsp;
 <span id="t1"></span> <input type="number" value="14" id="milis-val" class="inp-num" style="width: 50px;" step="2" onchange="perdidas=0; if(this.value%2!=0){ this.value++; } if(this.value<=1){ this.value=2; } if(this.value>=22){ this.value=22; } ">
 <select id="preguntaTime" class="mySelect">
   <option value="50">.05</option>
   <option value="100">.1</option>
+  <option value="150">.15</option>
   <option value="200">.2</option>
-  <option value="300">.3</option>
+  <option value="250">.25</option>
+  <option value="300" selected>.3</option>
+  <option value="350">.35</option>
   <option value="400">.4</option>
   <option value="500">.5</option>
-  <option value="600"  selected>.6</option>
+  <option value="600">.6</option>
   <option value="700">.7</option>
   <option value="800">.8</option>
   <option value="900">.9</option>
   <option value="1000">1</option>
+</select>
+<select id="preguntaTime1" class="mySelect">
+  <option value="50">.05</option>
+  <option value="100">.1</option>
+  <option value="150">.15</option>
+  <option value="200">.2</option>
+  <option value="250">.25</option>
+  <option value="300" selected>.3</option>
+  <option value="350">.35</option>
+  <option value="400">.4</option>
+  <option value="500">.5</option>
+  <option value="600">.6</option>
+  <option value="700">.7</option>
+  <option value="800">.8</option>
+  <option value="900">.9</option>
+  <option value="1000">1</option>
+</select>
+<select id="myDigits">
+  <option value="1">2 digits</option>
+  <option value="2">4 digits</option>
+  <option value="3">6 digits</option>
+  <option value="4"  selected>All</option>
 </select>
 
 <b>
@@ -166,26 +169,37 @@
  <a href="#" id="stop1">Stop&nbsp;</a>
 </b> 
  <span style="">
- <span>t: <input type="text" value="4000" id="timeValue" style="width: 30px;">&nbsp;<input type="text" value="3600" id="timeValue1" style="width: 28px;"></span>&nbsp;
+ <span>
+ <div class="dropdown">
+  t: <input type="text" value="4000" id="timeValue" style="width: 30px;">&nbsp;<input type="text" value="3600" id="timeValue1" style="width: 28px;"></span>&nbsp;
+  <div class="dropdown-content" style="width: 70px !important;">
+    <select id="changeMainVel" onchange="$('#timeValue').val(this.value); $('#timeValue1').val(parseInt(parseInt(this.value)-400));" class="mySelect">
+      <option value="2000">2</option>
+      <option value="2500">2.5</option>
+      <option value="3000">3</option>
+      <option value="3500">3.5</option>
+      <option value="4000" selected>4</option>
+      <option value="4500">4.5</option>
+      <option value="5000">5</option>
+      <option value="5500">5.5</option>
+      <option value="6000">6</option>
+    </select>
+  </div>
+ </div>
  </span>
  c: <span id="pasadas">36</span>&nbsp;
 
  <span class="oke">ok: <span id="ok">0</span>&nbsp;</span>
  <span class="oke">E: <span id="error">0</span>&nbsp;</span>
-
-<select id="imagenesTipos" style="width: 100px; display: none;">
-  <option value="1" selected>IAM OpenDb</option>
-  <option value="2">Emotions</option>
-  <option value="3">flags</option>
-  <option value="4">faces</option>
-</select> &nbsp;
+&nbsp;
 
 %: <input type="text" value="20" id="rndPorcentaje" style="width: 25px;">&nbsp; <!--deffault: 20-->
 <a href="#" onclick="showCC();">Custom Config</a>
 <a href="#" id="gray-btn" onclick="bGray=!bGray; if(bGray){ $('#canvas').css('background-color','gray'); $('body').css('background-color','gray'); $('select').css('background-color','gray'); $('.inp-num').css('background-color','gray'); $(':text').css('background-color','gray'); $('#gray-btn').html('white background');  }else{ $('#canvas').css('background-color','white'); $('body').css('background-color','white'); $('select').css('background-color','white'); $(':text').css('background-color','white'); $('.inp-num').css('background-color','white'); $('#gray-btn').html('gray background');  }"></a>
 <script type="text/javascript"> bGray = 0; $('#gray-btn').html('gray background'); </script>
-<? include "otherNback.php"; ?>
+<? @include "otherNback.php"; ?>
 <a href="#" onclick="alert('Rapid Memory N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nThis software is experimental and may contain errors.\nRapid Memory N-back is licensed under the GNU General Public License v3.0\nSource Code: https://github.com/vernetit/rapidmemorynback/\nContact: robertchalean@gmail.com');">?</a>
+&nbsp; <a href="http://atletismomental.blogspot.com.ar/2017/10/rapid-memory-n-back-de-memoria-rapida.html" target="_blank">Manual</a>
 &nbsp;<div class="fb-share-button" data-href="http://competicionmental.appspot.com/mrnback" data-layout="button_count" style="float: right;"></div>
 </div> <!-- Fin Controles -->
 <br>
@@ -229,13 +243,6 @@
 <div id="controls-div" style="width:700px;">
 <input type="button" value="A: Loci Match" id="pm" style="font-size: 20px; zoom: 1.2;">
 
-<!--
-<input type="button" value="S: vis and n-vis" id="vvm" style="">
-<input type="button" value="D: vis and n-audio" id="vam" style="">
-<input type="button" value="J: audio and n-vis" id="avm" style="">
-<input type="button" value="F: Color Match" id="cm" style="">
-<input type="button" value="J: Image Match" id="im" style="">
--->
 
 <input type="button" value="L: Number Match" id="sm" style="font-size: 20px; zoom: 1.2;">
 <input type="button" value="N: Next" id="next-btn" style="display:none;">
@@ -321,6 +328,9 @@ function selectTime(def,x){
       <option value="800">.8</option>
       <option value="900">.9</option>
       <option value="1000">1</option>
+      <option value="1200">1.2</option>
+      <option value="1400">1.4</option>
+      <option value="1500">1.5</option>
       <option value="2000">2</option>
       <option value="3000">3</option>
       <option value="4000">4</option>
@@ -362,44 +372,7 @@ arrayPreloadImages=[];
 
 zPreload=0;
 imgLoadedCount=0;
-/*
-function preload() {
 
-    $("#preload").html(""); 
-
-    for(i=0;i<arrayPreloadImages.length;i++){
-
-      //console.log(`<img src="${arrayImages[i]}" id="imgPreload-${zPreload}">`);
-
-       $("#preload").append(`<img src="${arrayPreloadImages[i]}" id="imgPreload-${zPreload}"  width="32" height="32" style="opacity: 0.5;">`);
-
-       $(`#imgPreload-${zPreload}`).on("load",function(){
-          
-          imgLoadedCount++;
-
-          if(imgLoadedCount==arrayPreloadImages.length){      
-
-            //$("#screen").html(""); 
-            $("#preload").hide(); 
-            $("#loading").hide(); 
-             $("#stop1").show();
-            //$("#recall-btn").show(); 
-            $("#controls-div").show();
-
-            //console.log(imgLoadedCount);
-
-            setTimeout(play(1),500); 
-                         
-           // init(0);
-
-         }
-       });
-
-     zPreload++;
-
-  } //end for
-} //end preload
-*/
 
 bOnGame=0;
 
@@ -437,6 +410,7 @@ var time;
 var bMismo=0;
 var posibleMismo="";
 var errorShow="";
+var myDigits=0;
 
 function play(_xxx){
 
@@ -446,6 +420,8 @@ function play(_xxx){
       return;
 
     limpiar();
+
+    myDigits=n("myDigits");
 
     bVariable=n("isVariable");
     errorShow="";
@@ -507,6 +483,10 @@ function play(_xxx){
 
      arrayImages1=[0,1,2,3,4,5,6,7,8,9];
 
+     t_ini = Date.now();
+
+     max=n("milis-val");
+
   }//end x==0
 
 
@@ -547,105 +527,6 @@ function play(_xxx){
       }
    }
    bOk1=0;
-
-
-  //Loci match error
-  /*
-  if(currentPasada>cantidadBack && bOk==0){
-
-      _s=currentPasada-1;
-      _b=currentPasada-1-cantidadBack;
-
-      comparar=-1; comparar1=-1; comparar2=-1;
-
-      if(cantidadLoci==2)
-       comparar=salidas[_b][1];
-
-     if(cantidadLoci==3){
-       comparar=salidas[_b][1];
-       comparar1=salidas[_b][2];
-     }
-
-     if(cantidadLoci==4){
-       comparar=salidas[_b][1];
-       comparar1=salidas[_b][2];
-       comparar2=salidas[_b][3];
-     }
-
-     if(salidas[_s][0]==salidas[_b][0] && salidas[_s][1]==comparar && salidas[_s][2]==comparar1 && salidas[_s][3]==comparar2){
-        //console.log("e pm");
-         //error++;
-         $("#pm").css("color","red");
-         actualizarErrores();
-         setTimeout(function(){ $("#pm").css("color","black"); },500);
-     }
-    }
-  bOk=0;
-
-  //Number match error
-  if(currentPasada>cantidadBack && bOk1==0 && sAct>0){
-
-    _s=currentPasada-1;
-    _b=currentPasada-1-cantidadBack;
-
-    comparar=-1; comparar1=-1; comparar2=-1; comparar3=-1; comparar4=-1; comparar5=-1; comparar6=-1;
-
-     if(cantidadElementos==2)
-       comparar=salidas1[_b][1];
-
-     if(cantidadElementos==3){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-     }
-
-     if(cantidadElementos==4){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-     }
-
-     if(cantidadElementos==5){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-     }
-
-     if(cantidadElementos==6){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-     }
-
-     if(cantidadElementos==7){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-       comparar5=salidas1[_b][6];
-     }
-
-    if(cantidadElementos==8){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-       comparar5=salidas1[_b][6];
-       comparar6=salidas1[_b][7];
-     }
-
-    if(salidas1[_s][0]==salidas1[_b][0] && salidas1[_s][1]==comparar && salidas1[_s][2]==comparar1 && salidas1[_s][3]==comparar2 && salidas1[_s][4]==comparar3  && salidas1[_s][5]==comparar4  && salidas1[_s][6]==comparar5  && salidas1[_s][7]==comparar6){
-       error1++;
-       $("#sm").css("color","red");
-       actualizarErrores();
-       setTimeout(function(){ $("#sm").css("color","black"); },500);
-    }
-  }*/
-  bOk1=0;
 
   if(pasadas==0){
      $("#stop1").hide();
@@ -727,8 +608,11 @@ function play(_xxx){
         sumaTxtTxt=" Sum of numbers= " + acumuladorSuma + "<br>";
       }
 
+      t_fin = Date.now();
+      t_dif = t_fin - t_ini;
+
       txt="<h3>Rapid Memory " + (cantidadBack-resta) + "-back " +  $("#milis-val").val() + " digits span Results!</h3>"  + positionTxt + " " + soundTxt + " " + imageTxt + " " + colorTxt + " " + vaTxt + " " + avTxt + "<br>" + sumaTxtTxt +
-         "Score: "+ porcentaje_ok + "% errors: " + errorShow + "<br>" + recomendacion;
+         "Score: "+ porcentaje_ok + "% errors: " + errorShow + "<br>" + "time:" + getDuration(t_dif) + " <br> " + recomendacion;
 
       $("#results").html(txt);
       //$("#canvas").html(`<div id="canvas11">Hello!<br>Here the instructions of the original nback game to guide you in locinback: <a href="http://brainworkshop.sourceforge.net/tutorial.html">http://brainworkshop.sourceforge.net/tutorial.html</a></div>`);
@@ -746,16 +630,6 @@ function play(_xxx){
       return;
 
    }
-
-   /*
-    if(bVariable==1){
-    
-      currentVariable=_.random(1,realCantidadBack);
-      //console.log(realCantidadBack);
-      cantidadBack=currentVariable;
-
-    }*/
-
 
    _r=_.random(1,100);
    //console.log(_r);
@@ -827,15 +701,34 @@ function play(_xxx){
 
       _pon = currentPasada-cantidadBack;
 
-      if(currentPasada>cantidadBack)
+      if(currentPasada>cantidadBack){
         posibleMismo = salidas1[_pon];
-      else
-        posibleMismo = _.random(0,9)+""+_.random(0,9);
+      }else{
+        if(myDigits==1 || myDigits==4)
+          posibleMismo = _.random(0,9)+""+_.random(0,9);
+        if(myDigits==2)
+          posibleMismo = _.random(0,9)+""+_.random(0,9)+""+_.random(0,9)+""+_.random(0,9);
+        if(myDigits==3)
+          posibleMismo = _.random(0,9)+""+_.random(0,9)+""+_.random(0,9)+""+_.random(0,9)+""+_.random(0,9)+""+_.random(0,9);
+        
+      }
 
 
       for(;;){
 
-         _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==1)
+          _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==2)
+           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==3)
+           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==4){
+          _myImagen1="";
+          for(_i=0;_i<max;_i++){
+            _myImagen1+=""+arrayImages1[_.random(0,9)];
+
+          }
+        }
 
         //checkear
          if(currentPasada>cantidadBack){
@@ -869,7 +762,7 @@ function play(_xxx){
   at=n("at-sel");
   //test=0;
 
-  max=n("milis-val");
+  
 
   time=n("tt"+(test+1));
 
@@ -915,9 +808,15 @@ function muestra(){
 
   for(;;){
 
-    sel=arraySel[_.random(0,arraySel.length-1)];
+   // if(myDigits==1)
+      sel=arraySel[_.random(0,arraySel.length-1)];
+  //  else
+   //   sel=arraySel[_.random(0,arraySel.length-1)];
 
-    if(sel<max-1) break;
+    if(sel<max-1 && myDigits==1) break;
+    if(sel<max-3 && myDigits==2) break;
+    if(sel<max-5 && myDigits==3) break;
+    if(myDigits==4) break;
 
   }
 
@@ -925,23 +824,26 @@ function muestra(){
 
     sel1=arraySel[_.random(0,arraySel.length-1)];
 
-    if(sel1<max-1  && sel1!=sel) break;
+    if(sel1<max-1  && sel1!=sel && myDigits==1) break;
+    if(sel1<max-1  && sel1!=sel && sel1!=sel+2 && myDigits==2) break;
+    if(sel1<max-1  && sel1!=sel && sel1!=sel+2 && sel1!=sel+4 && myDigits==3) break;
+    if( (max - (myDigits*2 )) >=2 ) break;
+    if(myDigits==4) break;    
    
   }
 
   bTruculento=0;
   if(!bMismo && _.random(1,100)<20){bTruculento=1; console.log("truculento"); } 
   
-
-
   a_bin=[];
   a_num=[];
 
   _x=0;
 
-
   for(let i=0;i<max;i++){
+
     space="";    
+
     if(i%2==0 && i!=0) space="&nbsp;";
 
     if(i>9 && i%2==0){
@@ -951,14 +853,38 @@ function muestra(){
 
     rnd=_.random(0,9);
 
-    if(bTruculento && (i==sel1 || i==sel1+1) ){
-      if(i==sel1){ rnd=posibleMismo[0]; }
-      if(i==sel1+1){ rnd=posibleMismo[1]; }
+    if(bTruculento && (i==sel1 || i==sel1+1) && (max - (myDigits*2 )) >=2 ){
 
+       if(i==sel1){ rnd=posibleMismo[0]; }
+       if(i==sel1+1){ rnd=posibleMismo[1]; }
 
     }else{
-      if(i==sel){ rnd=salidas1[currentPasada][0]; }
-      if(i==sel+1){ rnd=salidas1[currentPasada][1]; }
+      if(myDigits==1){
+        if(i==sel){ rnd=salidas1[currentPasada][0]; }
+        if(i==sel+1){ rnd=salidas1[currentPasada][1]; }
+
+      }
+      if(myDigits==2){
+        if(i==sel){ rnd=salidas1[currentPasada][0]; }
+        if(i==sel+1){ rnd=salidas1[currentPasada][1]; }
+        if(i==sel+2){ rnd=salidas1[currentPasada][2]; }
+        if(i==sel+3){ rnd=salidas1[currentPasada][3]; }
+      }
+      if(myDigits==3){
+        if(i==sel){ rnd=salidas1[currentPasada][0]; }
+        if(i==sel+1){ rnd=salidas1[currentPasada][1]; }
+        if(i==sel+2){ rnd=salidas1[currentPasada][2]; }
+        if(i==sel+3){ rnd=salidas1[currentPasada][3]; }
+        if(i==sel+4){ rnd=salidas1[currentPasada][4]; }
+        if(i==sel+5){ rnd=salidas1[currentPasada][5]; }
+
+      }
+     
+    }
+
+    if(myDigits==4){
+      rnd=salidas1[currentPasada][i];
+
     }
     
     poner+=(space+rnd);
@@ -1015,6 +941,8 @@ function muestra(){
   kill2=setTimeout(function(){
     $("#d"+ salidas[currentPasada][0] + "" + salidas[currentPasada][1]).html("");
 
+    if(myDigits==4) return;
+
     kill3=setTimeout(function(){ pregunta(); },n("preguntaTime"));
     //pregunta();
   },time);
@@ -1044,8 +972,8 @@ function pregunta(){
 
     }
 
-
-    if(i!=sel && i!=sel+1){
+   
+    if( (i!=sel && i!=sel+1 && myDigits==1) || (i!=sel && i!=sel+1 && i!=sel+2 && i!=sel+3 && myDigits==2) || (i!=sel && i!=sel+1 && i!=sel+2 && i!=sel+3 && i!=sel+4 && i!=sel+5 && myDigits==3)  ){
       poner+=space+"0";
       a_num[_x]=0;
     }
@@ -1107,7 +1035,7 @@ function pregunta(){
 
        $("#d"+salidas[currentPasada][0]+salidas[currentPasada][1]).html("");
 
-    },500);
+    },n("preguntaTime1"));
   }
 }
 
@@ -1371,6 +1299,36 @@ if(configApp==null){
   //console.log(configApp);
 
 }
+var t_ini;
+var t_fin;
+var t_dif;
+
+var getDuration = function(millis){
+  var dur = {};
+  var units = [
+      {label:"millis",    mod:1000},
+      {label:"seconds",   mod:60},
+      {label:"minutes",   mod:60},
+      {label:"hours",     mod:24},
+      {label:"days",      mod:31}
+  ];
+  // calculate the individual unit values...
+  units.forEach(function(u){
+      millis = (millis - (dur[u.label] = (millis % u.mod))) / u.mod;
+  });
+  // convert object to a string representation...
+  var nonZero = function(u){ return dur[u.label]; };
+  dur.toString = function(){
+      return units
+          .reverse()
+          .filter(nonZero)
+          .map(function(u){
+              return dur[u.label] + " " + (dur[u.label]==1?u.label.slice(0,-1):u.label);
+          })
+          .join(', ');
+  };
+  return dur;
+};
 
 </script>
 
