@@ -36,6 +36,7 @@ High interference led to partial improvements in the Attention Network Test (ANT
 This suggest that training on an interference control task leads to higher electrophysiological activity in the parietal cortex, which may be related to improvements in processing speed, attentional control, or both.
 
 https://www.ncbi.nlm.nih.gov/pubmed/23982078
+https://www.ncbi.nlm.nih.gov/pubmed/21787103
 
 Installation
 
