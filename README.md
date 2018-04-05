@@ -28,6 +28,9 @@ You practice speed reading, Major System, Eidetic Memory, working memory, mental
 
 Mr n-back have support for Tricky Stymuls (Interference)
 
+trying to emulate n +-1/(n-back+1) instead of novel/ totally random stimuli
+
+
 Increased parietal activity after training of interference control
 High interference led to partial improvements in the Attention Network Test (ANT
 This suggest that training on an interference control task leads to higher electrophysiological activity in the parietal cortex, which may be related to improvements in processing speed, attentional control, or both.
