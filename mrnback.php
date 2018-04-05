@@ -117,24 +117,24 @@
 
 <!-- Controles -->
 <div>
- <b>MR</b> 
+ <!-- <b>MR</b>  -->
  <a href="#" id="mas" style="text-decoration:none; color: #7D0552;"><b>+</b></a> 
  <span id="cantidadBack">2</span>
  <a href="#" id="menos"  style="text-decoration:none; color: #7D0552;"><b>-</b></a>
   &nbsp;
   Back&nbsp;
 
-<span id="t1"></span> <input type="number" value="14" id="milis-val" class="inp-num" style="width: 50px;" step="2" onchange="perdidas=0; if(this.value%2!=0){ this.value++; } if(this.value<=1){ this.value=2; } if(this.value>=22){ this.value=22; } ">
+<span id="t1"></span> <input type="number" value="12" id="milis-val" class="inp-num" style="width: 50px;" step="2" onchange="perdidas=0; if(this.value%2!=0){ this.value++; } if(this.value<=1){ this.value=2; } if(this.value>=22){ this.value=22; } ">
 <select id="preguntaTime" class="mySelect">
   <option value="50">.05</option>
   <option value="100">.1</option>
   <option value="150">.15</option>
   <option value="200">.2</option>
   <option value="250">.25</option>
-  <option value="300" selected>.3</option>
+  <option value="300">.3</option>
   <option value="350">.35</option>
   <option value="400">.4</option>
-  <option value="500">.5</option>
+  <option value="500" selected>.5</option>
   <option value="600">.6</option>
   <option value="700">.7</option>
   <option value="800">.8</option>
@@ -147,10 +147,10 @@
   <option value="150">.15</option>
   <option value="200">.2</option>
   <option value="250">.25</option>
-  <option value="300" selected>.3</option>
+  <option value="300">.3</option>
   <option value="350">.35</option>
   <option value="400">.4</option>
-  <option value="500">.5</option>
+  <option value="500" selected>.5</option>
   <option value="600">.6</option>
   <option value="700">.7</option>
   <option value="800">.8</option>
@@ -158,10 +158,10 @@
   <option value="1000">1</option>
 </select>
 <select id="myDigits">
-  <option value="1">2 digits</option>
+  <option value="1"  selected>2 digits</option>
   <option value="2">4 digits</option>
   <option value="3">6 digits</option>
-  <option value="4"  selected>All</option>
+  <option value="4" >All</option>
 </select>
 
 <b>
@@ -187,18 +187,32 @@
   </div>
  </div>
  </span>
+ <select id="mySplit">
+    <option value="0">no split</option>
+    <option value="1" selected>split 4</option>
+    <option value="2">split 5</option>
+</select> 
+ <select id="tricky">
+    <option value="0">no tricky</option>
+    <option value="12">12%</option>
+    <option value="25">25%</option>
+    <option value="37"  selected>37%</option>
+    <option value="50">50%</option>
+</select>
+ 
+
  c: <span id="pasadas">36</span>&nbsp;
 
  <span class="oke">ok: <span id="ok">0</span>&nbsp;</span>
  <span class="oke">E: <span id="error">0</span>&nbsp;</span>
 &nbsp;
 
-%: <input type="text" value="20" id="rndPorcentaje" style="width: 25px;">&nbsp; <!--deffault: 20-->
-<a href="#" onclick="showCC();">Custom Config</a>
+<span style="display:none;"> %: <input type="text" value="20" id="rndPorcentaje" style="width: 25px;"><!--deffault: 20--> </span>
+<a href="#" onclick="showCC();">Custom Cfg</a>
 <a href="#" id="gray-btn" onclick="bGray=!bGray; if(bGray){ $('#canvas').css('background-color','gray'); $('body').css('background-color','gray'); $('select').css('background-color','gray'); $('.inp-num').css('background-color','gray'); $(':text').css('background-color','gray'); $('#gray-btn').html('white background');  }else{ $('#canvas').css('background-color','white'); $('body').css('background-color','white'); $('select').css('background-color','white'); $(':text').css('background-color','white'); $('.inp-num').css('background-color','white'); $('#gray-btn').html('gray background');  }"></a>
 <script type="text/javascript"> bGray = 0; $('#gray-btn').html('gray background'); </script>
 <? @include "otherNback.php"; ?>
-<a href="#" onclick="alert('Rapid Memory N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nThis software is experimental and may contain errors.\nRapid Memory N-back is licensed under the GNU General Public License v3.0\nSource Code: https://github.com/vernetit/rapidmemorynback/\nContact: robertchalean@gmail.com');">?</a>
+<a href="#" onclick="alert('Rapid Memory N-Back\nTo learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\nSplit is 50%-50% phonological loop/eidetic posibility\n%: is the probability of elements repetition\nThis software is experimental and may contain errors.\nRapid Memory N-back is licensed under the GNU General Public License v3.0\nSource Code: https://github.com/vernetit/rapidmemorynback/\nContact: robertchalean@gmail.com');">?</a>
 &nbsp; <a href="http://atletismomental.blogspot.com.ar/2017/10/rapid-memory-n-back-de-memoria-rapida.html" target="_blank">Manual</a>
 &nbsp;<div class="fb-share-button" data-href="http://competicionmental.appspot.com/mrnback" data-layout="button_count" style="float: right;"></div>
 </div> <!-- Fin Controles -->
@@ -259,6 +273,7 @@
 bShowCC=0;
 bUseCC=0;
 currentCC="";
+mySplit=0;
 
 function showCC(){
   bShowCC=!bShowCC;
@@ -411,6 +426,9 @@ var bMismo=0;
 var posibleMismo="";
 var errorShow="";
 var myDigits=0;
+var arrayResults=[];
+var version=2;
+var tricky=37;
 
 function play(_xxx){
 
@@ -421,7 +439,11 @@ function play(_xxx){
 
     limpiar();
 
+    mySplit=n("mySplit");
+
     myDigits=n("myDigits");
+
+    tricky=n("tricky")
 
     bVariable=n("isVariable");
     errorShow="";
@@ -483,9 +505,45 @@ function play(_xxx){
 
      arrayImages1=[0,1,2,3,4,5,6,7,8,9];
 
+     max=n("milis-val");
+
+     arrayResults=[];
+     txt="";
+
+
+     for(i=0;i<8;i++){
+
+      for(;;){
+
+       if(myDigits==1)
+          _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==2)
+           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==3)
+           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+        if(myDigits==4){
+          _myImagen1="";
+          for(_i=0;_i<max;_i++){
+            _myImagen1+=""+arrayImages1[_.random(0,9)];
+
+          }//for
+        }//if
+
+          if(txt.indexOf(_myImagen1)==-1) break;
+
+      }//for(;;)
+
+      txt+=_myImagen1; arrayResults[i]=_myImagen1;
+
+     }//for i
+
+     console.log(arrayResults)
+
+
+
      t_ini = Date.now();
 
-     max=n("milis-val");
+     
 
   }//end x==0
 
@@ -649,8 +707,28 @@ function play(_xxx){
 
       for(;;){
        
-         __x = _.random(0,2);
-         __y = _.random(0,2);
+         
+
+        if(version==1){
+
+          __x = _.random(0,2);
+          __y = _.random(0,2);
+
+         }//if version == 1
+
+        if(version==2){
+
+           __x = _.random(0,2);
+           __y = _.random(0,2);
+
+          //tricky
+          if(_.random(1,100)<=tricky && tricky!=0 && cantidadBack!=1 && currentPasada-cantidadBack+1>=0){
+            __x=salidas[_.random(currentPasada-cantidadBack+1,currentPasada-1)][0];
+            __y=salidas[_.random(currentPasada-cantidadBack+1,currentPasada-1)][1];
+            console.log("tricky n-back A");
+          }
+
+         }//if version == 2
          
          
          if(__x!=1 || __y!=1){
@@ -716,19 +794,31 @@ function play(_xxx){
 
       for(;;){
 
-        if(myDigits==1)
-          _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
-        if(myDigits==2)
-           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
-        if(myDigits==3)
-           _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
-        if(myDigits==4){
-          _myImagen1="";
-          for(_i=0;_i<max;_i++){
-            _myImagen1+=""+arrayImages1[_.random(0,9)];
+        if(version==1){
+           if(myDigits==1)
+              _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+            if(myDigits==2)
+               _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+            if(myDigits==3)
+               _myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
+            if(myDigits==4){
+              _myImagen1="";
+              for(_i=0;_i<max;_i++){
+                _myImagen1+=""+arrayImages1[_.random(0,9)];
 
+              }
+            }
+        } // if version == 1
+
+         if(version==2){
+
+          _myImagen1=arrayResults[_.random(0,7)];
+
+          //tricky
+          if(_.random(1,100)<=tricky && tricky!=0 && cantidadBack!=1 && currentPasada-cantidadBack+1>=0){
+            _myImagen1=salidas1[_.random(currentPasada-cantidadBack+1,currentPasada-1)]; console.log("tricky n-back L");
           }
-        }
+         }//if version == 2
 
         //checkear
          if(currentPasada>cantidadBack){
@@ -740,7 +830,9 @@ function play(_xxx){
          }
           
            //break;
-      }//for  
+      }//for 
+
+
    }//currentPasada>cantidadBack
   
    salidas[currentPasada]=[];
@@ -806,10 +898,33 @@ function muestra(){
       sel=_.random(0,max-1);
     }*/
 
+  myBase=0;
+  myMax=arraySel.length-1;
+  
+  if(_.random(0,1)){
+    console.log("a");
+    
+    if(mySplit==1) myBase=4;
+    if(mySplit==2) myBase=5;
+  }else{
+    console.log("b");
+
+    if(mySplit==1) myMax=4
+    if(mySplit==2) myMax=5;
+
+  }
+
+  count=0;
   for(;;){
 
+    if(count==200){
+      myBase=0;
+      myMax=arraySel.length-1;
+    }
+    //console.log(count)
+
    // if(myDigits==1)
-      sel=arraySel[_.random(0,arraySel.length-1)];
+    sel=arraySel[_.random(myBase,myMax)];
   //  else
    //   sel=arraySel[_.random(0,arraySel.length-1)];
 
@@ -818,6 +933,7 @@ function muestra(){
     if(sel<max-5 && myDigits==3) break;
     if(myDigits==4) break;
 
+    count++;
   }
 
   for(;;){
@@ -833,7 +949,7 @@ function muestra(){
   }
 
   bTruculento=0;
-  if(!bMismo && _.random(1,100)<20){bTruculento=1; console.log("truculento"); } 
+  if(!bMismo && _.random(1,100)<=tricky){bTruculento=1; console.log("tricky m-span"); } 
   
   a_bin=[];
   a_num=[];
@@ -1279,9 +1395,9 @@ if(bMobile==1){
 $("#d00").css("background-image","url('https://maps.googleapis.com/maps/api/streetview?size=290x190&location=25.1854152,55.3699478&fov=90&heading=297&pitch=10&key=AIzaSyB-CedQccD4tyO5TGMOSb5s1fMb-c6Nh-A')");
 */
 
-$("#menos").click();
+//$("#menos").click();
 
-$("#milis-val").val("16")
+$("#milis-val").val("12")
 // $("#tt1").val("6000")
 
 testCCDefault="${a_num[0]}${a_num[1]}&nbsp;${a_num[2]}${a_num[3]}&nbsp;${a_num[4]}${a_num[5]}&nbsp;${a_num[6]}${a_num[7]}&nbsp;${a_num[8]}${a_num[9]}&nbsp;${a_num[10]}${a_num[11]}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${a_num[12]}${a_num[13]}&nbsp;${a_num[14]}${a_num[15]}";
